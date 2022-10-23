@@ -1,40 +1,53 @@
 # Write your test here
 import pytest
-from challenge01 import LinkedList,Node
+from challenge01 import delete_node
+# #################### Node class #################### #  
+class Node:
+    "A Class that creates node with pointer refers to None"
+    def __init__(self,value):
+        self.value = value
+        self.next = None
 
+# #################### LinkedList class #################### #  
 
-def test_length(linkedlist_test):
-    assert linkedlist_test.get_length()=='The linked list has a 0 of nodes'
+class LinkedList:
+    '''
+    A Class that creates a linked list and handles its nodes :
+    1. append method to append a new node into a linked list  
+    2. all_nodes method returns all nodes as a List 
+    '''
+    def __init__(self):
+        self.head = None
+    def append(self, node):
+        if self.head is None:
+            self.head = node
+        else:
+            current = self.head
+            while current.next is not None:
+                current = current.next
+            current.next = node
 
-
-def test_append_node(linkedlist_test,node_test):
-    linkedlist_test.append(node_test[0])
-    assert linkedlist_test.get_length()=='The linked list has a 1 of nodes'
-    linkedlist_test.append(node_test[1])
-    assert linkedlist_test.get_length()=='The linked list has a 2 of nodes'
-    linkedlist_test.append(node_test[2])
-    linkedlist_test.append(node_test[3])
-    assert linkedlist_test.get_length()=='The linked list has a 4 of nodes'
-
-
-def test_delete_node(linkedlist_test,node_test):
-    assert linkedlist_test.get_length()=='The linked list has a 0 of nodes'
-    linkedlist_test.append(node_test[2])
-    linkedlist_test.append(node_test[3])
-    assert linkedlist_test.get_length()=='The linked list has a 2 of nodes'
-
-
+    def all_nodes(self):
+        list_of_nodes=[]
+        if self.head is None:
+            print("The linked list is empty")
+        else:
+            current = self.head
+            while current is not None:
+                list_of_nodes.append(current.value)
+                current = current.next
+        return list_of_nodes
+        
 
 def test_delete_last_node(linkedlist_test,node_test):
     linkedlist_test.append(node_test[0])
-    assert linkedlist_test.delete_node(node_test[0]) =="The linked list should have at least 2 nodes to delete"
+    assert delete_node(node_test[0]) =="Sorry we can not delete the last node!!"
     linkedlist_test.append(node_test[3])
-    assert linkedlist_test.delete_node(node_test[3]) =="Sorry we can not delete the last node!!" 
-    assert linkedlist_test.get_length()=='The linked list has a 2 of nodes'
+    assert delete_node(node_test[3]) =="Sorry we can not delete the last node!!" 
     linkedlist_test.append(node_test[1])
     linkedlist_test.append(node_test[2])
-    linkedlist_test.delete_node(node_test[3])
-    assert linkedlist_test.get_length()=='The linked list has a 3 of nodes'
+    delete_node(node_test[3])
+    assert delete_node(node_test[3]) =="the node is deleted!!"
 
 
 def test_all_nodes(linkedlist_test,node_test):
