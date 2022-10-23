@@ -1,12 +1,14 @@
 
-
 def delete_node( node):
-        if node.next is not None:
-            node.value = node.next.value
-            node.next = node.next.next
-            return "the node is deleted!!"
-        else:
-           return "Sorry we can not delete the last node!!" 
+    '''
+    A function that takes a node as argument and delete it from a linked list 
+    '''
+    if node.next is not None:
+        node.value = node.next.value
+        node.next = node.next.next
+        return "the node is deleted!!"
+    else:
+        return "Sorry we can not delete the last node!!" 
 
 if __name__=="__main__":
     from test_challenge01 import Node,LinkedList
